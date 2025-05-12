@@ -1,0 +1,27 @@
+
+
+<div class="container my-4">
+    <h2>Quản lý Tác giả</h2>
+    <a href="/" class="btn btn-primary mb-3">🏠 Về trang chủ</a> <br>
+    <a href="/add-author" class="btn btn-success mb-3">Thêm Tác giả</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tên tác giả</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% authors.forEach(author => { %>
+                <tr>
+                    <td><%= author.name %></td>
+                    <td>
+                        <a href="/edit-author/<%= author._id %>" class="btn btn-warning btn-sm">Sửa</a>
+                        <a href="/delete-author/<%= author._id %>" class="btn btn-danger btn-sm">Xóa</a>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+

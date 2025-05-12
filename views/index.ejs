@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý sách</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <style>
+        .card-img-top {
+            width: 100%;
+            height: 450px; 
+            object-fit: cover;
+        }
+    </style>
+    <header class="bg-primary text-white p-3">
+        <div class="container d-flex justify-content-between">
+            <h1>Quản lý Sách</h1>
+            <form action="/" method="GET" class="d-flex">
+                <input type="text" name="search" class="form-control" placeholder="Tìm kiếm sách..." value="<%= searchQuery %>">
+                <button type="submit" class="btn btn-dark ms-2">Tìm</button>
+            </form>
+    
+            <!-- Nút TG, TL mở modal -->
+            <button class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#manageModal">TG, TL</button>
+    
+            <a href="/add-book" class="btn btn-success">Thêm sách</a>
+        </div>
+    </header>
+    
+    <!-- Modal quản lý tác giả, thể loại -->
+    <div class="modal fade" id="manageModal" tabindex="-1" aria-labelledby="manageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="manageModalLabel">Chọn chức năng quản lý</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <a href="/manage-authors" class="btn btn-primary w-100 mb-2">Quản lý Tác giả</a>
+                    <a href="/manage-genres" class="btn btn-secondary w-100">Quản lý Thể loại</a>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+    <div class="container my-4">
+        <h2>Danh sách sách</h2>
+        <div class="row">
+            <% books.forEach(book => { %>
+                <div class="col-md-3">
+                    <div class="card mb-3">
+                        <img src="<%= book.coverImage %>" class="card-img-top" alt="<%= book.title %>">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= book.title %></h5>
+                            <p class="card-text">Năm phát hành: <%= book.year %></p>
+                            <a href="/book/<%= book._id %>" class="btn btn-info">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+        <% if (books.length > 0) { %>
+            <% if (skip + 8 < totalBooks) { %>
+                <a href="/?skip=<%= skip + 8 %>" class="btn btn-primary">Xem thêm</a>
+            <% } %>
+        <% } %>        
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="messageModalLabel">Thông báo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <%= message %>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    if ('<%= message %>' !== '') {
+        var myModal = new bootstrap.Modal(document.getElementById('messageModal'));
+        myModal.show();
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm thể loại</title>
+</head>
+<body>
+    <a href="/" class="btn btn-primary mb-3">🏠 Về trang chủ</a> <br>
+    <h1>Thêm thể loại</h1>
+    <% if (message) { %>
+        <p style="color: green;"><%= message %></p>
+    <% } %>
+    <form action="/add-genre" method="POST">
+        <label for="name">Tên thể loại:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="submit">Thêm</button>
+    </form>
+</body>
+</html>
