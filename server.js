@@ -35,7 +35,7 @@ app.use(session({ secret: 'secret-key', resave: false, saveUninitialized: true }
 app.use(express.urlencoded({ extended: true }));  // Xử lý form-data
 app.use(express.json());  // Xử lý JSON
 
-// Sử dụng routes từ file riêng
+// Sử dụng routes từ file riêngg
 app.use(authorRoutes);
 app.use(genreRoutes);
 app.use('/', bookRoutes);
